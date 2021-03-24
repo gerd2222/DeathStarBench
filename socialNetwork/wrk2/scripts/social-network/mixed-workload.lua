@@ -1,6 +1,7 @@
 require "socket"
-local time = socket.gettime()*1000
+local time = os.time()*1000
 math.randomseed(time)
+
 math.random(); math.random(); math.random()
 
 local charset = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's',
@@ -98,14 +99,18 @@ local function read_home_timeline()
     local stop = tostring(start + 10)
   
     local args = "user_id=" .. user_id .. "&start=" .. start .. "&stop=" .. stop
+  
     local method = "GET"
     local headers = {}
     headers["Content-Type"] = "application/x-www-form-urlencoded"
     local path = "http://localhost:8080/wrk2-api/home-timeline/read?" .. args
+
     return wrk.format(method, path, headers, nil)
   end
 
 request = function()
+
+  
     cur_time = math.floor(socket.gettime())
     local read_home_timeline_ratio = 0.60
     local read_user_timeline_ratio = 0.30

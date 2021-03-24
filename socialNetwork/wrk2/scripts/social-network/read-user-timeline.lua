@@ -2,7 +2,7 @@ require "socket"
 local time = socket.gettime()*1000
 math.randomseed(time)
 math.random(); math.random(); math.random()
-
+-- same as in the mixed workload
 request = function()
   local user_id = tostring(math.random(1, 962))
   local start = tostring(math.random(0, 100))
@@ -16,3 +16,4 @@ request = function()
   return wrk.format(method, path, headers, nil)
 
 end
+  

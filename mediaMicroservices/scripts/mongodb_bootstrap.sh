@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# this is for the sharding scenario!
 declare -a services=( \
     "user" \
     "movie-id" \

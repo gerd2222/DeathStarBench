@@ -1,5 +1,5 @@
 require "socket"
-time = socket.gettime()*1000
+time = os.time()*1000
 math.randomseed(time)
 math.random(); math.random(); math.random()
 
@@ -1029,7 +1029,7 @@ request = function()
   local rating = math.random(0, 10)
   local text = string.random(256)
 
-  local path = "http://127.0.0.1:8080/wrk2-api/review/compose"
+  local path = "/wrk2-api/review/compose" -- http://127.0.0.1:8080 
   local method = "POST"
   local headers = {}
   local body = "username=" .. username .. "&password=" .. password .. "&title=" ..

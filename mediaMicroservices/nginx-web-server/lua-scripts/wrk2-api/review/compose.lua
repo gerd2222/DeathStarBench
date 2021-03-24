@@ -4,6 +4,7 @@ local function _StrIsEmpty(s)
   return s == nil or s == ''
 end
 
+-- we cannot see inside the services that implement the functionality ~~ how to debug thrift operations?
 local function _UploadUserId(req_id, post, carrier)
   local GenericObjectPool = require "GenericObjectPool"
   local UserServiceClient = require 'media_service_UserService'
@@ -70,11 +71,14 @@ function _M.ComposeReview()
     ngx.thread.spawn(_UploadUniqueId, req_id, carrier)
   }
 
+  -- wait all model
+  -- the threads are spawned, and we loop over them cause we want to wait for all
   local status = ngx.HTTP_OK
   for i = 1, #threads do
     local ok, res = ngx.thread.wait(threads[i])
     if not ok then
       status = ngx.HTTP_INTERNAL_SERVER_ERROR
+      ngx.log(ngx.ERR, res)
     end
   end
   span:finish()

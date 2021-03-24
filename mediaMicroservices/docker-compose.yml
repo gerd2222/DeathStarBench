@@ -169,7 +169,7 @@ services:
     hostname: nginx-thrift
     ports:
       - 8080:8080
-    restart: always
+    restart: 'no'
     volumes:
       - ./nginx-web-server/lua-scripts:/usr/local/openresty/nginx/lua-scripts
       - ./nginx-web-server/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
